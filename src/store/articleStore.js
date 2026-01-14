@@ -13,11 +13,9 @@ const useArticleStore = create((set) => ({
     loading: false,
     error: null,
 
-    // Fetch all articles
     fetchArticles: async (params = {}) => {
         set({ loading: true, error: null });
         try {
-            // Filter out empty parameters
             const cleanParams = Object.entries(params).reduce((acc, [key, value]) => {
                 if (value !== '' && value !== null && value !== undefined) {
                     acc[key] = value;
@@ -39,7 +37,6 @@ const useArticleStore = create((set) => ({
         }
     },
 
-    // Fetch single article
     fetchArticleById: async (id) => {
         set({ loading: true, error: null });
         try {
@@ -56,7 +53,6 @@ const useArticleStore = create((set) => ({
         }
     },
 
-    // Create article
     createArticle: async (articleData) => {
         set({ loading: true, error: null });
         try {
@@ -75,7 +71,6 @@ const useArticleStore = create((set) => ({
         }
     },
 
-    // Update article
     updateArticle: async (id, articleData) => {
         set({ loading: true, error: null });
         try {
@@ -97,7 +92,6 @@ const useArticleStore = create((set) => ({
         }
     },
 
-    // Delete article
     deleteArticle: async (id) => {
         set({ loading: true, error: null });
         try {
@@ -115,10 +109,8 @@ const useArticleStore = create((set) => ({
         }
     },
 
-    // Clear current article
     clearCurrentArticle: () => set({ currentArticle: null }),
 
-    // Clear error
     clearError: () => set({ error: null }),
 }));
 

@@ -103,12 +103,9 @@ const ArticleForm = () => {
             navigate('/');
         } catch (error) {
             console.error('Submission error:', error);
-
-            // Handle different error shapes
             const responseData = error.response?.data;
 
             if (responseData?.errors) {
-                // Specific field errors from Zod
                 const mappedErrors = {};
                 responseData.errors.forEach(err => {
                     const field = err.field.split('.').pop();
@@ -117,10 +114,8 @@ const ArticleForm = () => {
                 });
                 setFieldErrors(mappedErrors);
             } else if (responseData?.message) {
-                // General operation error
                 toast.error(responseData.message);
             } else if (error.request) {
-                // Network error (no response)
                 toast.error('Network error. Please check your connection or try again later.');
             } else {
                 toast.error('An unexpected error occurred. Please try again.');
@@ -144,7 +139,6 @@ const ArticleForm = () => {
 
             <form onSubmit={handleSubmit} className="space-y-12">
                 <div className="space-y-10">
-                    {/* Image Upload Section */}
                     <div className="space-y-3">
                         <label className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400 ml-1">Cover Image (Optional)</label>
                         <div className={`relative group rounded-3xl overflow-hidden border-2 border-dashed transition-all ${fieldErrors.image ? 'border-rose-200' : 'border-slate-100 hover:border-slate-200'}`}>
@@ -180,7 +174,6 @@ const ArticleForm = () => {
                         </div>
                     </div>
 
-                    {/* Title Input */}
                     <div className="space-y-2">
                         <div className="flex justify-between items-center px-1">
                             <label className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400">Title</label>
@@ -196,7 +189,6 @@ const ArticleForm = () => {
                         />
                     </div>
 
-                    {/* Content Input */}
                     <div className="space-y-2">
                         <div className="flex justify-between items-center px-1">
                             <label className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400">Content</label>
@@ -218,7 +210,6 @@ const ArticleForm = () => {
                     </div>
                 </div>
 
-                {/* Footer Actions */}
                 <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-8 pt-10 border-t border-slate-50">
                     <div className="flex items-center gap-8">
                         <div className="flex flex-col">
