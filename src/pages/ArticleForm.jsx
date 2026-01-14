@@ -53,9 +53,11 @@ const ArticleForm = () => {
         e.preventDefault();
         try {
             const data = new FormData();
+            // IMPORTANT: Append text fields BEFORE the file to ensure Multer populates req.body for validation
             data.append('title', formData.title);
             data.append('content', formData.content);
             data.append('status', formData.status);
+
             if (formData.image) {
                 data.append('image', formData.image);
             }
