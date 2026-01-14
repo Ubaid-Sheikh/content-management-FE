@@ -71,7 +71,14 @@ const ArticleForm = () => {
             }
             navigate('/');
         } catch (error) {
-            toast.error(error.response?.data?.message || 'Failed to save');
+            if (error.response?.data?.errors) {
+                // Handle Zod validation errors
+                error.response.data.errors.forEach(err => {
+                    toast.error(`${err.field}: ${err.message}`);
+                });
+            } else {
+                toast.error(error.response?.data?.message || 'Failed to save');
+            }
         }
     };
 
@@ -135,7 +142,12 @@ const ArticleForm = () => {
                     </div>
 
                     <div className="space-y-2">
-                        <label className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400 ml-1">Content</label>
+                        <div className="flex justify-between items-center">
+                            <label className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400 ml-1">Content</label>
+                            <span className={`text-[10px] font-bold ${formData.content.length < 10 ? 'text-rose-400' : 'text-slate-300'}`}>
+                                {formData.content.length} / 10 min
+                            </span>
+                        </div>
                         <textarea
                             rows="15"
                             className="w-full py-4 text-lg font-medium border-b border-slate-100 focus:border-slate-900 transition-all outline-none bg-white text-slate-800 leading-relaxed placeholder:text-slate-200 min-h-[400px]"
