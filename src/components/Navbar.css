@@ -1,9 +1,11 @@
 .navbar {
-    background: white;
+    background: var(--color-surface);
     border-bottom: 1px solid var(--color-border);
     position: sticky;
     top: 0;
     z-index: 100;
+    backdrop-filter: blur(10px);
+    background: rgba(255, 255, 255, 0.95);
 }
 
 .navbar-content {
@@ -14,21 +16,15 @@
 }
 
 .navbar-brand {
-    display: flex;
-    align-items: center;
-    gap: var(--space-2);
-    font-size: var(--font-size-20);
-    font-weight: 400;
+    font-size: var(--font-size-18);
+    font-weight: 700;
     color: var(--color-text);
+    letter-spacing: -0.02em;
+    transition: opacity 0.2s;
 }
 
 .navbar-brand:hover {
-    text-decoration: none;
-    opacity: 0.8;
-}
-
-.brand-icon {
-    font-size: 24px;
+    opacity: 0.7;
 }
 
 .navbar-menu {
@@ -38,38 +34,44 @@
 }
 
 .nav-link {
-    padding: var(--space-2) var(--space-4);
+    height: 36px;
+    padding: 0 var(--space-4);
+    display: flex;
+    align-items: center;
     font-size: var(--font-size-14);
     font-weight: 500;
-    color: var(--color-text-light);
-    border-radius: var(--radius);
+    color: var(--color-text-secondary);
+    border-radius: var(--radius-sm);
     transition: all 0.2s;
 }
 
 .nav-link:hover {
-    background: var(--color-hover);
     color: var(--color-text);
-    text-decoration: none;
+    background: var(--color-surface-secondary);
 }
 
 .navbar-user {
     display: flex;
     align-items: center;
     gap: var(--space-4);
-    padding-left: var(--space-4);
+    padding-left: var(--space-5);
     border-left: 1px solid var(--color-border);
 }
 
 .user-info {
     display: flex;
-    flex-direction: column;
-    align-items: flex-end;
+    align-items: center;
+    gap: var(--space-3);
 }
 
 .user-name {
     font-size: var(--font-size-14);
-    font-weight: 500;
+    font-weight: 600;
     color: var(--color-text);
+}
+
+.user-separator {
+    color: var(--color-text-tertiary);
 }
 
 .navbar-actions {
@@ -92,7 +94,7 @@
 
     .nav-link {
         width: 100%;
-        text-align: center;
+        justify-content: center;
     }
 
     .navbar-user {
@@ -102,10 +104,6 @@
         padding-top: var(--space-4);
         border-left: none;
         border-top: 1px solid var(--color-border);
-    }
-
-    .user-info {
-        align-items: center;
     }
 
     .navbar-actions {

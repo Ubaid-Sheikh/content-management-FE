@@ -2,11 +2,10 @@ import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import useAuthStore from '../store/authStore';
-import './Auth.css';
 
 const Register = () => {
     const navigate = useNavigate();
-    const { register, loading } = useAuthStore();
+    const { register: signup, loading } = useAuthStore();
     const [formData, setFormData] = useState({
         name: '',
         email: '',
@@ -23,15 +22,13 @@ const Register = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-
         if (formData.password.length < 6) {
             toast.error('Password must be at least 6 characters');
             return;
         }
-
         try {
-            await register(formData);
-            toast.success('Registration successful! Welcome aboard.');
+            await signup(formData);
+            toast.success('Registration successful!');
             navigate('/');
         } catch (error) {
             toast.error(error.response?.data?.message || 'Registration failed');
@@ -39,102 +36,95 @@ const Register = () => {
     };
 
     return (
-        <div className="auth-page">
-            <div className="auth-container">
-                <div className="auth-card">
-                    <div className="auth-header">
-                        <h1>Create Account</h1>
-                        <p className="text-muted">Join our content workspace</p>
+        <div className="min-h-[calc(100vh-56px)] flex items-center justify-center bg-white px-4 py-12 fade-in">
+            <div className="w-full max-w-sm">
+                <div className="text-center mb-10">
+                    <h1 className="text-3xl font-bold text-slate-900 tracking-tight mb-3">Create Account</h1>
+                    <p className="text-slate-500 text-sm">Join the workspace to start contributing</p>
+                </div>
+
+                <form onSubmit={handleSubmit} className="space-y-6">
+                    <div className="space-y-1.5">
+                        <label htmlFor="name" className="block text-xs font-bold uppercase tracking-widest text-slate-400 ml-1">
+                            Full Name
+                        </label>
+                        <input
+                            type="text"
+                            id="name"
+                            name="name"
+                            className="w-full px-4 py-3 bg-white border border-slate-200 rounded-xl focus:border-slate-900 focus:ring-0 transition-all outline-none text-slate-900 placeholder:text-slate-300"
+                            placeholder="John Doe"
+                            value={formData.name}
+                            onChange={handleChange}
+                            required
+                        />
                     </div>
 
-                    <form onSubmit={handleSubmit} className="auth-form">
-                        <div className="form-group">
-                            <label htmlFor="name" className="form-label">
-                                Full Name
-                            </label>
-                            <input
-                                type="text"
-                                id="name"
-                                name="name"
-                                className="form-input"
-                                placeholder="John Doe"
-                                value={formData.name}
-                                onChange={handleChange}
-                                required
-                            />
-                        </div>
+                    <div className="space-y-1.5">
+                        <label htmlFor="email" className="block text-xs font-bold uppercase tracking-widest text-slate-400 ml-1">
+                            Email
+                        </label>
+                        <input
+                            type="email"
+                            id="email"
+                            name="email"
+                            className="w-full px-4 py-3 bg-white border border-slate-200 rounded-xl focus:border-slate-900 focus:ring-0 transition-all outline-none text-slate-900 placeholder:text-slate-300"
+                            placeholder="name@example.com"
+                            value={formData.email}
+                            onChange={handleChange}
+                            required
+                        />
+                    </div>
 
-                        <div className="form-group">
-                            <label htmlFor="email" className="form-label">
-                                Email Address
-                            </label>
-                            <input
-                                type="email"
-                                id="email"
-                                name="email"
-                                className="form-input"
-                                placeholder="you@example.com"
-                                value={formData.email}
-                                onChange={handleChange}
-                                required
-                            />
-                        </div>
+                    <div className="space-y-1.5">
+                        <label htmlFor="password" className="block text-xs font-bold uppercase tracking-widest text-slate-400 ml-1">
+                            Password
+                        </label>
+                        <input
+                            type="password"
+                            id="password"
+                            name="password"
+                            className="w-full px-4 py-3 bg-white border border-slate-200 rounded-xl focus:border-slate-900 focus:ring-0 transition-all outline-none text-slate-900 placeholder:text-slate-300"
+                            placeholder="••••••••"
+                            value={formData.password}
+                            onChange={handleChange}
+                            required
+                        />
+                    </div>
 
-                        <div className="form-group">
-                            <label htmlFor="password" className="form-label">
-                                Password
-                            </label>
-                            <input
-                                type="password"
-                                id="password"
-                                name="password"
-                                className="form-input"
-                                placeholder="••••••••"
-                                value={formData.password}
-                                onChange={handleChange}
-                                required
-                            />
-                            <small className="text-muted">Minimum 6 characters</small>
-                        </div>
-
-                        <div className="form-group">
-                            <label htmlFor="role" className="form-label">
-                                Select Role
-                            </label>
-                            <select
-                                id="role"
-                                name="role"
-                                className="form-select"
-                                value={formData.role}
-                                onChange={handleChange}
-                            >
-                                <option value="VIEWER">Viewer (Read-only)</option>
-                                <option value="EDITOR">Editor (Create & Edit)</option>
-                                <option value="ADMIN">Admin (Full Access)</option>
-                            </select>
-                            <small className="text-muted">
-                                Choose your access level
-                            </small>
-                        </div>
-
-                        <button
-                            type="submit"
-                            className="btn btn-primary btn-lg"
-                            style={{ width: '100%' }}
-                            disabled={loading}
+                    <div className="space-y-1.5">
+                        <label htmlFor="role" className="block text-xs font-bold uppercase tracking-widest text-slate-400 ml-1">
+                            Role
+                        </label>
+                        <select
+                            id="role"
+                            name="role"
+                            className="w-full px-4 py-3 bg-white border border-slate-200 rounded-xl focus:border-slate-900 focus:ring-0 transition-all outline-none text-slate-900 appearance-none cursor-pointer"
+                            value={formData.role}
+                            onChange={handleChange}
                         >
-                            {loading ? 'Creating account...' : 'Create Account'}
-                        </button>
-                    </form>
-
-                    <div className="auth-footer">
-                        <p className="text-muted">
-                            Already have an account?{' '}
-                            <Link to="/login" className="auth-link">
-                                Sign in
-                            </Link>
-                        </p>
+                            <option value="VIEWER">Viewer</option>
+                            <option value="EDITOR">Editor</option>
+                            <option value="ADMIN">Admin</option>
+                        </select>
                     </div>
+
+                    <button
+                        type="submit"
+                        className="w-full bg-slate-900 hover:bg-black text-white font-bold py-3.5 px-4 rounded-xl transition-all active:scale-[0.99] disabled:opacity-50 mt-2"
+                        disabled={loading}
+                    >
+                        {loading ? 'Creating account...' : 'Create Account'}
+                    </button>
+                </form>
+
+                <div className="mt-10 text-center">
+                    <p className="text-slate-400 text-sm">
+                        Already have an account?{' '}
+                        <Link to="/login" className="text-slate-900 font-bold hover:underline">
+                            Sign in
+                        </Link>
+                    </p>
                 </div>
             </div>
         </div>

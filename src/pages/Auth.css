@@ -1,10 +1,10 @@
 .auth-page {
-    min-height: 100vh;
+    min-height: calc(100vh - 64px);
     display: flex;
     align-items: center;
     justify-content: center;
     padding: var(--space-6);
-    background: white;
+    background: radial-gradient(circle at top left, #0f172a, #020617);
 }
 
 .auth-container {
@@ -14,47 +14,58 @@
 
 .auth-card {
     background: white;
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius);
-    padding: var(--space-12);
-    box-shadow: var(--shadow-1);
+    border-radius: var(--radius-md);
+    padding: var(--space-8);
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
 }
 
 .auth-header {
     text-align: center;
-    margin-bottom: var(--space-8);
+    margin-bottom: var(--space-6);
 }
 
 .auth-header h1 {
     font-size: var(--font-size-24);
-    font-weight: 400;
-    margin-bottom: var(--space-2);
+    font-weight: 700;
+    margin-bottom: var(--space-1);
+    color: var(--color-text);
 }
 
 .auth-header p {
-    font-size: var(--font-size-14);
-    color: var(--color-text-light);
+    font-size: var(--font-size-13);
+    color: var(--color-text-tertiary);
 }
 
-.auth-form {
-    margin-bottom: var(--space-6);
+.auth-form .form-group {
+    margin-bottom: var(--space-4);
+}
+
+.auth-form .form-label {
+    font-size: var(--font-size-12);
+    margin-bottom: 4px;
+    font-weight: 600;
+}
+
+.auth-form .form-input,
+.auth-form .form-select {
+    height: 38px;
+    font-size: var(--font-size-14);
 }
 
 .auth-footer {
     text-align: center;
+    margin-top: var(--space-6);
     padding-top: var(--space-6);
-    border-top: 1px solid var(--color-border);
-    font-size: var(--font-size-14);
-    color: var(--color-text-light);
+    border-top: 1px solid var(--color-border-light);
+    font-size: var(--font-size-13);
 }
 
 .auth-link {
     color: var(--color-primary);
-    font-weight: 500;
+    font-weight: 600;
+    text-decoration: none;
 }
 
-@media (max-width: 768px) {
-    .auth-card {
-        padding: var(--space-8);
-    }
+.auth-link:hover {
+    text-decoration: underline;
 }

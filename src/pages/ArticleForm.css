@@ -5,76 +5,40 @@
 
 .form-header {
     text-align: center;
-    margin-bottom: var(--space-8);
+    margin-bottom: var(--space-10);
 }
 
 .form-header h1 {
-    font-size: var(--font-size-32);
-    font-weight: 400;
-    margin-bottom: var(--space-2);
+    font-size: var(--font-size-40);
+    font-weight: 700;
+    margin-bottom: var(--space-3);
 }
 
 .article-form {
-    background: white;
+    background: var(--color-surface);
     border: 1px solid var(--color-border);
-    border-radius: var(--radius);
-    padding: var(--space-8);
-    box-shadow: var(--shadow-1);
+    border-radius: var(--radius-lg);
+    padding: var(--space-10);
+    box-shadow: var(--shadow-md);
 }
 
-.editor-wrapper {
-    border-radius: var(--radius);
-    overflow: hidden;
-    border: 1px solid var(--color-border);
-}
-
-.editor-wrapper .quill {
-    background: white;
-    border: none;
-}
-
-.editor-wrapper .ql-toolbar {
-    background: #f8f9fa;
-    border: none;
-    border-bottom: 1px solid var(--color-border);
-}
-
-.editor-wrapper .ql-container {
-    border: none;
-    font-size: var(--font-size-16);
-    font-family: var(--font-family);
-    min-height: 400px;
-}
-
-.editor-wrapper .ql-editor {
-    color: var(--color-text);
-    min-height: 400px;
-    padding: var(--space-6);
-    line-height: 1.6;
-}
-
-.editor-wrapper .ql-editor.ql-blank::before {
-    color: var(--color-text-light);
-    font-style: normal;
+.form-textarea {
+    font-family: var(--font-sans);
+    line-height: 1.7;
 }
 
 .form-actions {
     display: flex;
-    gap: var(--space-3);
+    gap: var(--space-4);
     justify-content: flex-end;
-    margin-top: var(--space-6);
-    padding-top: var(--space-6);
-    border-top: 1px solid var(--color-border);
+    margin-top: var(--space-8);
+    padding-top: var(--space-8);
+    border-top: 1px solid var(--color-border-light);
 }
 
 @media (max-width: 768px) {
     .article-form {
         padding: var(--space-6);
-    }
-
-    .editor-wrapper .ql-container,
-    .editor-wrapper .ql-editor {
-        min-height: 300px;
     }
 
     .form-actions {
