@@ -1,16 +1,35 @@
-# React + Vite
+# Frontend - Secure Content Workspace
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This is the user interface for the Secure Content Workspace, built with React and Tailwind CSS.
 
-Currently, two official plugins are available:
+## Tech Stack
+- React 19 (Vite)
+- Tailwind CSS v4
+- Zustand for state management
+- React Router v7 for navigation
+- Axios for API communication
+- React Toastify for notifications
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Project Structure
+- src/components/ : Reusable UI components.
+- src/pages/ : Main view containers like the Article Feed, Login, and Editor.
+- src/store/ : Zustand state stores for articles and authentication.
+- src/services/ : Axios instance and API abstraction layer.
 
-## React Compiler
+## Local Setup
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+1. Install dependencies:
+   `npm install`
 
-## Expanding the ESLint configuration
+2. Configuration:
+   Create a `.env` file in this directory and set:
+   `VITE_API_URL=http://localhost:5000/api`
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+3. Start the application:
+   `npm run dev`
+
+## Decisions and Trade-offs
+
+- Minimalist Design: The "Pure White" aesthetic was chosen to maximize focus on content and typography, removing unnecessary visual noise.
+- Tailwind v4: Used for its modern performance and small bundle size, allowing for high-end styling without huge CSS overhead.
+- State Management: Zustand was chosen over Redux for its simplicity and lack of boilerplate, which fits the agile nature of this project.
