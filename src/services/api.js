@@ -30,8 +30,21 @@ api.interceptors.response.use(
             // Unauthorized - clear token and redirect to login
             localStorage.removeItem('token');
             localStorage.removeItem('user');
-            window.location.href = '/login';
+            // Only redirect if not already on login/register to avoid loops
+            if (!window.location.pathname.includes('/login') && !window.location.pathname.includes('/register')) {
+                window.location.href = '/login';
+            }
         }
+
+        // Handle Vercel/Deployment errors that might return HTML
+        const contentType = error.response?.headers?.['content-type'];
+        if (contentType && !contentType.includes('application/json')) {
+            error.response.data = {
+                success: false,
+                message: `Server Error (${error.response.status}): The server returned an unexpected response format.`
+            };
+        }
+
         return Promise.reject(error);
     }
 );
