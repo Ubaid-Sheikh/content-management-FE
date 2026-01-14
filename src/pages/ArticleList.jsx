@@ -105,17 +105,14 @@ const ArticleList = () => {
                         {articles.map((article) => (
                             <div key={article.id} className="group relative flex flex-col items-start bg-white">
                                 <Link to={`/articles/${article.id}`} className="block mb-4 overflow-hidden rounded-2xl w-full aspect-[16/10] bg-slate-100">
-                                    {article.imageUrl ? (
-                                        <img
-                                            src={article.imageUrl}
-                                            alt={article.title}
-                                            className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                                        />
-                                    ) : (
-                                        <div className="w-full h-full flex items-center justify-center text-slate-300 font-black text-4xl uppercase tracking-tighter transition-transform duration-500 group-hover:scale-110">
-                                            {article.title.substring(0, 2)}
-                                        </div>
-                                    )}
+                                    <img
+                                        src={article.imageUrl || `https://source.unsplash.com/random/800x600?sig=${article.id}`}
+                                        alt={article.title}
+                                        className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                                        onError={(e) => {
+                                            e.target.src = `https://source.unsplash.com/random/800x600?sig=${article.id}`;
+                                        }}
+                                    />
                                 </Link>
 
                                 <div className="flex items-center gap-3 mb-3">

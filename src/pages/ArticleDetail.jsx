@@ -76,15 +76,16 @@ const ArticleDetail = () => {
                     {currentArticle.title}
                 </h1>
 
-                {currentArticle.imageUrl && (
-                    <div className="w-full aspect-video rounded-3xl overflow-hidden mb-12 bg-slate-50">
-                        <img
-                            src={currentArticle.imageUrl}
-                            alt={currentArticle.title}
-                            className="w-full h-full object-cover"
-                        />
-                    </div>
-                )}
+                <div className="w-full aspect-video rounded-3xl overflow-hidden mb-12 bg-slate-50">
+                    <img
+                        src={currentArticle.imageUrl || `https://source.unsplash.com/random/1200x800?sig=${currentArticle.id}`}
+                        alt={currentArticle.title}
+                        className="w-full h-full object-cover"
+                        onError={(e) => {
+                            e.target.src = `https://source.unsplash.com/random/1200x800?sig=${currentArticle.id}`;
+                        }}
+                    />
+                </div>
 
                 <div className="flex items-center justify-between py-6 border-y border-slate-100">
                     <div className="flex items-center gap-4">
