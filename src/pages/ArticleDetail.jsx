@@ -78,11 +78,11 @@ const ArticleDetail = () => {
 
                 <div className="w-full aspect-video rounded-3xl overflow-hidden mb-12 bg-slate-50">
                     <img
-                        src={currentArticle.imageUrl || `https://source.unsplash.com/random/1200x800?sig=${currentArticle.id}`}
+                        src={currentArticle.imageUrl || `https://picsum.photos/seed/${currentArticle.id}/1200/800`}
                         alt={currentArticle.title}
                         className="w-full h-full object-cover"
                         onError={(e) => {
-                            e.target.src = `https://source.unsplash.com/random/1200x800?sig=${currentArticle.id}`;
+                            e.target.src = `https://picsum.photos/seed/${currentArticle.id}/1200/800`;
                         }}
                     />
                 </div>
