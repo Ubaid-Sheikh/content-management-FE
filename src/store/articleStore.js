@@ -17,7 +17,15 @@ const useArticleStore = create((set) => ({
     fetchArticles: async (params = {}) => {
         set({ loading: true, error: null });
         try {
-            const response = await articleService.getArticles(params);
+            // Filter out empty parameters
+            const cleanParams = Object.entries(params).reduce((acc, [key, value]) => {
+                if (value !== '' && value !== null && value !== undefined) {
+                    acc[key] = value;
+                }
+                return acc;
+            }, {});
+
+            const response = await articleService.getArticles(cleanParams);
             set({
                 articles: response.data.articles,
                 pagination: response.data.pagination,
